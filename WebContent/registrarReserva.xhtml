@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+<h:head></h:head>
+<h:body>
+
+
+	<h:form>
+		<legend >Agregar Reserva</legend>
+		<div>
+			<h:inputText id="id-card" name="text" type="text" a:placeholder="CI.Cliente" class="form-control" value="#{reservaBean.cedula}"/>
+			<h:outputLabel id="salida" name="text" type="text"  class="form-control" value="#{reservaBean.resultado1}">
+				<div>
+				<c:if test="#{reservaBean.resultado1 == 'encontrado'}">
+			    	<c:set var="myVar" value="true"/>
+			    	
+			    	<h:inputText id="id-card3" name="text" type="text" a:placeholder="Restaurante" class="form-control" value="#{reservaBean.restaurante}"/>
+					<h:outputLabel id="salida3" name="text" type="text"  class="form-control" value="#{reservaBean.resultado2}">
+						<div>
+						<c:if test="#{reservaBean.resultado2 == 'encontrado'}">
+			    			<c:set var="myVar2" value="true"/>
+								<h:commandButton class="btn btn-primary btn-lg" value="Agregar Reserva" action="#{reservaBean.reservar}">
+									
+								</h:commandButton>
+						</c:if>
+						</div>
+					</h:outputLabel>
+			    	<h:commandButton class="btn btn-primary btn-lg" value="Validar Restaurante" action="#{reservaBean.buscarRestaurante}">
+							<f:ajax execute="id-card3" render="salida3"/>
+					</h:commandButton>
+						    	
+				</c:if>
+				</div>
+			</h:outputLabel>
+			
+			
+		</div>
+		
+		<h:commandButton class="btn btn-primary btn-lg" value="Validar Usuario" action="#{reservaBean.buscarCliente}">
+				<f:ajax execute="id-card" render="salida2 salida"/>
+		</h:commandButton>
+		
+		
+			
+	</h:form>
+		
+		
+
+</h:body>
+</html>
